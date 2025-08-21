@@ -1,7 +1,7 @@
 # Library App
 
 A simple RESTful API built with **Express.js** and **MongoDB** (via Mongoose) for managing a collection of books.  
-This project is intended for learning and practicing the basics of Node.js, Express, MongoDB, and CRUD operations.
+This project is intended for practicing the basics of Node.js, Express, MongoDB, and CRUD operations.
 
 ---
 
@@ -30,7 +30,7 @@ This project is intended for learning and practicing the basics of Node.js, Expr
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/library-app.git
+   git clone https://github.com/anaare/library-app.git
    cd library-app
    ```
 
