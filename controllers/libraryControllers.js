@@ -75,7 +75,10 @@ exports.updateBook = async (req, res) => {
 
 exports.deleteBook = async (req, res) => {
   try {
-    await Book.findIdAndDelete(req.params.id);
+    const book = await Book.findByIdAndDelete(req.params.id);
+
+    console.log(book);
+
     res.status(204).json({
       status: "success",
       data: {
