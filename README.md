@@ -30,8 +30,8 @@ This project is intended for practicing the basics of Node.js, Express, MongoDB,
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/anaare/library-app.git
-   cd library-app
+   git clone https://github.com/anaare/libraryAPI.git
+   cd libraryAPI
    ```
 
 2. **Install dependencies:**
