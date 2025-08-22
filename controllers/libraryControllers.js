@@ -2,7 +2,13 @@ const Book = require("../models/Book");
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find();
+    // 1) FILTERING
+    let queryObj = { ...req.query }; // create shallow copy of query object
+    const excludedFields = ["page", "limit", "fields", "sort"]; // create an array to exclude unrelated fields
+    excludedFields.forEach((el) => delete queryObj[el]);
+
+    const books = await Book.find(queryObj);
+
     res.status(200).json({
       status: "success",
       data: {
