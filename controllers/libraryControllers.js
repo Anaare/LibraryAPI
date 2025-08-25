@@ -7,7 +7,33 @@ exports.getAllBooks = async (req, res) => {
     const excludedFields = ["page", "limit", "fields", "sort"]; // create an array to exclude unrelated fields
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    const books = await Book.find(queryObj);
+    // Build the query object in the format Mongoose expects
+    const newQueryObj = {};
+    for (const key in queryObj) {
+      if (Object.prototype.hasOwnProperty.call(queryObj, key)) {
+        if (key.includes("[") && key.includes("]")) {
+          const [field, operator] = key
+            .split("[")
+            .map((s) => s.replace("]", ""));
+          newQueryObj[field] = { [`$${operator}`]: queryObj[key] };
+        } else {
+          newQueryObj[key] = queryObj[key];
+        }
+      }
+    }
+
+    let query = Book.find(newQueryObj);
+
+    // 2) SORTING
+
+    if (req.query.sort) {
+      query = query.sort(req.query.sort);
+    } else {
+      query = query.sort("-publishedYear");
+    }
+
+    // Executing Query
+    const books = await query;
 
     res.status(200).json({
       status: "success",
